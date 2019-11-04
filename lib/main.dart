@@ -1,71 +1,149 @@
+import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/cupertino.dart';
 
-void main() => runApp(MyApp());
-class MyApp extends StatelessWidget {
-  final List<String> entries = <String>['Ayo Belajar', 'Latihan soal', 'Informasi Aplikasi'];
-  final List<int> colorCodes = <int>[600, 500, 100];
-  int _current = 0;
-  List imgList = [
-    'https://images.unsplash.com/photo-1502117859338-fd9daa518a9a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-    'https://images.unsplash.com/photo-1554321586-92083ba0a115?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-    'https://images.unsplash.com/photo-1536679545597-c2e5e1946495?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-    'https://images.unsplash.com/photo-1543922596-b3bbaba80649?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-    'https://images.unsplash.com/photo-1502943693086-33b5b1cfdf2f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80'
-  ];
+void main() => runApp(MaterialApp(
+  debugShowCheckedModeBanner: false,
+  title: 'Athfal Aplication',
+  home: HomePage(),
+));
 
+class HomePage extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Athfal Aplication',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Athfal Aplication'),
-          backgroundColor: Colors.lightBlueAccent[700]
-        ),
-        body: Column(
-          children: <Widget>[
-            CarouselSlider(
-              height: 400.0,
-              initialPage: 0,
-              enlargeCenterPage: true,
-              autoPlay: true,
-              reverse: false,
-              enableInfiniteScroll: true,
-              autoPlayInterval: Duration(seconds: 2),
-              autoPlayAnimationDuration: Duration(milliseconds: 2000),
-              pauseAutoPlayOnTouch: Duration(seconds: 10),
-              scrollDirection: Axis.horizontal,
-              onPageChanged: (index) {
-                setState((){
-                  _current = index;
-                });
-              },
-              items: imgList.map((imgUrl) {
-                return Builder(
-                  builder: (BuildContext context) {
-                    return Container(
-                      width: MediaQuery.of(context).size.width,
-                      margin: EdgeInsets.symmetric(horizontal: 10.0),
-                      decoration: BoxDecoration(
-                        color: Colors.green,
-                      ),
-                      child: Image.network(
-                        imgUrl,
-                        fit: BoxFit.fill,
-                      ),
-                    );
-                  },
-                );
-              }).toList(),
-            ),
-            Column()
-        ],)
-      ),
+  _HomePageState createState() => _HomePageState();
+}
 
+class _HomePageState extends State<HomePage> {
+  @override
+  Widget image_nggeser = Container(
+    height: 300.0,
+    child: Carousel(
+      boxFit: BoxFit.cover,
+      images: [
+        AssetImage('assets/img/img1.png'),
+        AssetImage('assets/img/img2.jpg'),
+      ],
+      autoplay: true,
+      indicatorBgPadding: 1.0,
+      dotColor: Colors.redAccent,
+    ),
+  );
+
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Athfal Aplication"),
+        backgroundColor: Colors.cyanAccent,
+      ),
+      body: ListView(
+        children: <Widget>[
+          image_nggeser,
+          Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  print("object");
+                  AlertDialog(
+                    title: Text('Not in stock'),
+                    content: const Text('This item is no longer available'),
+                    actions: <Widget>[
+                      FlatButton(
+                        child: Text('Ok'),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  );
+                },
+                child: Container(
+                  width: double.infinity,
+                  color: Colors.yellow,
+                  margin: EdgeInsets.all(25.0),
+                  height: 50.0,
+                  child: Card(
+                    child: Center(
+                      child: Text("Tengah!!"),
+                    ),
+                  ),
+                ),
+              ),
+              GestureDetector(
+                child: Container(
+                  width: double.infinity,
+                  color: Colors.yellow,
+                  margin: EdgeInsets.all(25.0),
+                  height: 50.0,
+                  child: Card(
+                    child: Center(
+                      child: Text("Latihan Soal"),
+                    ),
+                  ),
+                ),
+              ),
+              GestureDetector(
+                child: Container(
+                  width: double.infinity,
+                  color: Colors.yellow,
+                  margin: EdgeInsets.all(25.0),
+                  height: 50.0,
+                  child: Card(
+                    child: Center(
+                      child: Text("Tentang Aplikasi"),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        ],
+      ),
     );
   }
-
-  void setState(Null Function() param0) {}
 }
+// enum Departments { Production, Research, Purchasing, Marketing, Accounting }
+ 
+// Future<Departments> _asyncSimpleDialog(BuildContext context) async {
+//   return await showDialog<Departments>(
+//       context: context,
+//       barrierDismissible: true,
+//       builder: (BuildContext context) {
+//         return SimpleDialog(
+//           title: const Text('Select Departments '),
+//           children: <Widget>[
+//             SimpleDialogOption(
+//               onPressed: () {
+//                 Navigator.pop(context, Departments.Production);
+//               },
+//               child: const Text('Production'),
+//             ),
+//             SimpleDialogOption(
+//               onPressed: () {
+//                 Navigator.pop(context, Departments.Research);
+//               },
+//               child: const Text('Research'),
+//             ),
+//             SimpleDialogOption(
+//               onPressed: () {
+//                 Navigator.pop(context, Departments.Purchasing);
+//               },
+//               child: const Text('Purchasing'),
+//             ),
+//             SimpleDialogOption(
+//               onPressed: () {
+//                 Navigator.pop(context, Departments.Marketing);
+//               },
+//               child: const Text('Marketing'),
+//             ),
+//             SimpleDialogOption(
+//               onPressed: () {
+//                 Navigator.pop(context, Departments.Accounting);
+//               },
+//               child: const Text('Accounting'),
+//             )
+//           ],
+//         );
+//       });
+// }

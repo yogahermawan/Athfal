@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "465664889554",
+    "firebase_url": "https://athfal-aplication.firebaseio.com",
+    "project_id": "athfal-aplication",
+    "storage_bucket": "athfal-aplication.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:465664889554:android:0937d511f570281af9130b",
+        "android_client_info": {
+          "package_name": "com.example.athfal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "465664889554-p9n3ov4ijrlrj2qunevcj5isv0o7giq9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiyccmKhxRIBbpmDm6yDUMRteW1itR__A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "465664889554-p9n3ov4ijrlrj2qunevcj5isv0o7giq9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
