@@ -1,7 +1,7 @@
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
 import 'package:athfal/alertdialog.dart';
-import 'package:athfal/materi.dart';
+import 'package:athfal/Materi.dart';
 
 void main() => runApp(MaterialApp(
   debugShowCheckedModeBanner: false,
@@ -9,8 +9,8 @@ void main() => runApp(MaterialApp(
   home: HomePage(),
   initialRoute: "/",
   routes: {
-    alertdialog.routeName: (context)=>alertdialog(),
-    materi.routeName: (context)=> materi()
+    AlertDialogPage.routeName: (context)=>AlertDialogPage(),
+    MateriPage.routeName: (context)=>MateriPage()
   },
 ));
 
@@ -40,6 +40,15 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text("Athfal Aplication"),
         backgroundColor: Colors.cyanAccent,
+        actions: <Widget>[
+          FlatButton(
+            shape: CircleBorder(),
+            child: Icon(Icons.person),
+            onPressed: (){
+              print("object");
+            },
+          )
+        ],
       ),
       body: ListView(
         children: <Widget>[
@@ -51,7 +60,7 @@ class _HomePageState extends State<HomePage> {
               GestureDetector(
                 onTap: () {
                   print("object");
-                  Navigator.pushNamed(context, alertdialog.routeName);
+                  Navigator.pushNamed(context, AlertDialogPage.routeName);
                 },
                 child: Container(
                   width: double.infinity,
