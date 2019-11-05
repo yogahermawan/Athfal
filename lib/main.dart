@@ -1,10 +1,17 @@
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
+import 'package:athfal/alertdialog.dart';
+import 'package:athfal/materi.dart';
 
 void main() => runApp(MaterialApp(
   debugShowCheckedModeBanner: false,
   title: 'Athfal Aplication',
   home: HomePage(),
+  initialRoute: "/",
+  routes: {
+    alertdialog.routeName: (context)=>alertdialog(),
+    materi.routeName: (context)=> materi()
+  },
 ));
 
 class HomePage extends StatefulWidget {
@@ -15,7 +22,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget image_nggeser = Container(
-    height: 300.0,
+    height: 200.0,
     child: Carousel(
       boxFit: BoxFit.cover,
       images: [
@@ -44,18 +51,7 @@ class _HomePageState extends State<HomePage> {
               GestureDetector(
                 onTap: () {
                   print("object");
-                  AlertDialog(
-                    title: Text('Not in stock'),
-                    content: const Text('This item is no longer available'),
-                    actions: <Widget>[
-                      FlatButton(
-                        child: Text('Ok'),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ],
-                  );
+                  Navigator.pushNamed(context, alertdialog.routeName);
                 },
                 child: Container(
                   width: double.infinity,
