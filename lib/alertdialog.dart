@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'materi.dart';
+import 'Materi.dart';
 
-class alertdialog extends StatelessWidget{
+class AlertDialogPage extends StatelessWidget{
   static final routeName = "/alertDialog";
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class alertdialog extends StatelessWidget{
           child: Text("Materi"),
           color: Colors.black,
             onPressed: () {
-            Navigator.pushNamed(context, materi.routeName);
+            Navigator.pushNamed(context, MateriPage.routeName);
           },
         )
       ],
