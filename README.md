@@ -16,3 +16,7 @@ For help getting started with Flutter, view our
 samples, guidance on mobile development, and a full API reference.
 
 For halaman depan make ListView => popUp => gridView(card).
+
+Mockup : 
+
+<img src="abouthasil.png">
