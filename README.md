@@ -20,3 +20,6 @@ For halaman depan make ListView => popUp => gridView(card).
 Mockup : 
 
 <img src="abouthasil.png">
+<img src="homemateriadmin.png">
+<img src="homematerilatihan.png">
+<img src="loginuploadsoal.png">
