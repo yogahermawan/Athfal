@@ -1,26 +1,25 @@
 import 'package:carousel_pro/carousel_pro.dart';
+import 'package:etestt/Model/MateriDetailModel.dart';
 import 'package:etestt/Provider/ApiService.dart';
-import 'package:etestt/View/MateriDetail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../Model/MateriModel.dart';
 
 import '../alertdialog.dart';
 
-class ListMateri extends StatefulWidget {
+class MateriDetail extends StatefulWidget {
   final namaKelas;
-  final namaMapel;
 
-  const ListMateri({Key key, this.namaKelas, this.namaMapel}) : super(key: key);
+  const MateriDetail({Key key, this.namaKelas}) : super(key: key);
 
   @override
-  _ListMateriState createState() => _ListMateriState();
+  _MateriDetailState createState() => _MateriDetailState();
 }
 
-class _ListMateriState extends State<ListMateri> {
+class _MateriDetailState extends State<MateriDetail> {
   static final routeName = "/kelas";
   //final duplicateItems = getMateri();
-  Future<List<MateriModel>> _mat;
+  Future<List<MateriDetailModel>> _mat;
   ApiService _apiServices = ApiService();
 
 
@@ -33,7 +32,7 @@ class _ListMateriState extends State<ListMateri> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _mat = _apiServices.getMateriList(widget.namaKelas, widget.namaMapel);
+    _mat = _apiServices.getMateriDetail(1);
     print("kesini kan"+widget.namaKelas);
 
     //  items.addAll(duplicateItems);
@@ -80,28 +79,37 @@ class _ListMateriState extends State<ListMateri> {
                     itemCount: snapshot.data.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
-                        padding: EdgeInsets.only(left: 5.0, right: 7.0),
                         width: MediaQuery.of(context).size.width,
-                        height: 100.0,
-                        child: InkWell(
-                             onTap: () {
-                    print("object");
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                          return MateriDetail(namaKelas: snapshot.data[index].namaMateri,);
-                        }));
-                  },
-                          child: Card(
-                            elevation: 5.0,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15.0)),
-                            child: Container(
-                                padding: EdgeInsets.all(8.0),
-                                child: ListTile(
-                                  title: Text(snapshot.data[index].namaMateri),
-                                  subtitle: Text(snapshot.data[index].deskripsi),
-                                )),
-                          ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            ListTile(
+                              title: Container(
+                                padding: EdgeInsets.only(bottom: 10.0),
+                                child: Text(
+                                  snapshot.data[index].namaMapel ,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20.0),
+                                ),
+                              ),
+                            
+                            ),
+                            SizedBox(
+                              height: 10.0,
+                            ),
+                            Container(
+                                width: MediaQuery.of(context).size.width,
+                                color: Colors.white,
+                                padding: EdgeInsets.only(top: 10.0),
+                                child: Text(
+                                  snapshot.data[index].isi ,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20.0),
+                                ),),
+                          ],
                         ),
                       );
                     },

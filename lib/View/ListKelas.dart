@@ -1,4 +1,5 @@
 
+import 'package:etestt/View/ListMapel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -38,7 +39,7 @@ class _ListKelasState extends State<ListKelas> {
                   print("object");
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) {
-                        return ListMateri(namaKelas: kelas[index],);
+                        return ListMapel(namaKelas: kelas[index],);
                       }));
                 },
                 child: Card(

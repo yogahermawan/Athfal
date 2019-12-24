@@ -1,31 +1,29 @@
 import 'package:carousel_pro/carousel_pro.dart';
+import 'package:etestt/Model/MapelModel.dart';
 import 'package:etestt/Provider/ApiService.dart';
-import 'package:etestt/View/MateriDetail.dart';
+import 'package:etestt/View/ListMateri.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../Model/MateriModel.dart';
-
 import '../alertdialog.dart';
 
-class ListMateri extends StatefulWidget {
+class ListMapel extends StatefulWidget {
   final namaKelas;
-  final namaMapel;
 
-  const ListMateri({Key key, this.namaKelas, this.namaMapel}) : super(key: key);
+  const ListMapel({Key key, this.namaKelas}) : super(key: key);
 
   @override
-  _ListMateriState createState() => _ListMateriState();
+  _ListMapelState createState() => _ListMapelState();
 }
 
-class _ListMateriState extends State<ListMateri> {
+class _ListMapelState extends State<ListMapel> {
   static final routeName = "/kelas";
   //final duplicateItems = getMateri();
-  Future<List<MateriModel>> _mat;
+  Future<List<MapelModel>> _iur;
   ApiService _apiServices = ApiService();
 
 
   final appBar = AppBar(
-    title: Text("Materi Pelajaran"),
+    title: Text("Mata Pelajaran"),
     backgroundColor: Colors.cyanAccent,
   );
 
@@ -33,7 +31,9 @@ class _ListMateriState extends State<ListMateri> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _mat = _apiServices.getMateriList(widget.namaKelas, widget.namaMapel);
+    _iur = _apiServices.getMapelList(widget.namaKelas);
+
+
     print("kesini kan"+widget.namaKelas);
 
     //  items.addAll(duplicateItems);
@@ -44,7 +44,7 @@ class _ListMateriState extends State<ListMateri> {
     return Scaffold(
         appBar: appBar,
         body: FutureBuilder(
-          future: _mat,
+          future: _iur,
           // ignore: missing_return
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             switch (snapshot.connectionState) {
@@ -73,7 +73,7 @@ class _ListMateriState extends State<ListMateri> {
                     elevation: 4.0,
                     child: Padding(
                         padding: EdgeInsets.all(8.0),
-                        child: Text("Tidak ada Materi")),
+                        child: Text("Tidak ada Mapel")),
                   );
                 } else {
                   final _iuran = ListView.builder(
@@ -84,21 +84,21 @@ class _ListMateriState extends State<ListMateri> {
                         width: MediaQuery.of(context).size.width,
                         height: 100.0,
                         child: InkWell(
-                             onTap: () {
+                          onTap: () {
                     print("object");
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                          return MateriDetail(namaKelas: snapshot.data[index].namaMateri,);
+                          return ListMateri(namaKelas: snapshot.data[index].nama_kelas, namaMapel: snapshot.data[index].nama_mapel ,);
                         }));
                   },
-                          child: Card(
+                                                  child: Card(
                             elevation: 5.0,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15.0)),
                             child: Container(
                                 padding: EdgeInsets.all(8.0),
                                 child: ListTile(
-                                  title: Text(snapshot.data[index].namaMateri),
+                                  title: Text(snapshot.data[index].nama_mapel),
                                   subtitle: Text(snapshot.data[index].deskripsi),
                                 )),
                           ),
