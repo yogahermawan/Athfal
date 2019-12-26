@@ -26,9 +26,9 @@ class ApiService{
     }
   }
 
-  Future<List<MateriModel>> getMateriList(String namaKelas, String namaMapel) async {
+  Future<List<MateriModel>> getMateriList(String idMapel, String idKelas) async {
      List<MateriModel> materi;
-    var data = {"namaKelas": namaKelas, "namaMapel":namaMapel};
+    var data = {"idMapel": idMapel, "idKelas":idKelas};
     final body = json.encode(data);
     print(body);
     final res = await http.post("http://ec2-34-203-236-133.compute-1.amazonaws.com/mapel/getmateri", headers: {"Content-Type": "application/json"}, body: body);
@@ -45,9 +45,9 @@ class ApiService{
   }
 
 
-    Future<List<MateriDetailModel>> getMateriDetail(int idMapel) async {
+    Future<List<MateriDetailModel>> getMateriDetail(int id) async {
      List<MateriDetailModel> detailMapel;
-    var data = {"idMapel": idMapel, };
+    var data = {"id": id, };
     final body = json.encode(data);
     final res = await http.post("http://ec2-34-203-236-133.compute-1.amazonaws.com/mapel/detailmapel", headers: {"Content-Type": "application/json"}, body: body);
     final resResult = json.decode(res.body);

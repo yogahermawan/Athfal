@@ -102,12 +102,10 @@ class _MateriDetailState extends State<MateriDetail> {
                             Container(
                                 width: MediaQuery.of(context).size.width,
                                 color: Colors.white,
-                                padding: EdgeInsets.only(top: 10.0),
+                                padding: EdgeInsets.all(15.0),
                                 child: Text(
                                   snapshot.data[index].isi ,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20.0),
+                                 
                                 ),),
                           ],
                         ),

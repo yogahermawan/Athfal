@@ -1,5 +1,5 @@
 class MateriDetailModel {
-  int idMapel;
+  int id;
   String namaMapel;
   String namaMateri;
   String namaKelas;
@@ -9,10 +9,10 @@ class MateriDetailModel {
   String updated_at;
   
 
-  MateriDetailModel({this.idMapel, this.namaMapel, this.namaMateri, this.namaKelas, this.isi, this.file, this.created_at, this.updated_at});
+  MateriDetailModel({this.id, this.namaMapel, this.namaMateri, this.namaKelas, this.isi, this.file, this.created_at, this.updated_at});
 
   MateriDetailModel.fromJson(Map<String, dynamic> map)
-      : idMapel = map['idMapel'],
+      : id = map['id'],
         namaMapel = map['namaMapel'],
         namaMateri = map['namaMateri'],
         namaKelas = map['namaKelas'],

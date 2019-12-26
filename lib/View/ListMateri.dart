@@ -8,10 +8,10 @@ import '../Model/MateriModel.dart';
 import '../alertdialog.dart';
 
 class ListMateri extends StatefulWidget {
-  final namaKelas;
-  final namaMapel;
+  final idKelas;
+  final idMapel;
 
-  const ListMateri({Key key, this.namaKelas, this.namaMapel}) : super(key: key);
+  const ListMateri({Key key, this.idKelas, this.idMapel}) : super(key: key);
 
   @override
   _ListMateriState createState() => _ListMateriState();
@@ -33,8 +33,8 @@ class _ListMateriState extends State<ListMateri> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _mat = _apiServices.getMateriList(widget.namaKelas, widget.namaMapel);
-    print("kesini kan"+widget.namaKelas);
+    _mat = _apiServices.getMateriList(widget.idMapel, widget.idKelas);
+    print("kesini kan"+widget.idKelas);
 
     //  items.addAll(duplicateItems);
   }

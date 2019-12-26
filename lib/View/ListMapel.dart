@@ -88,7 +88,7 @@ class _ListMapelState extends State<ListMapel> {
                     print("object");
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                          return ListMateri(namaKelas: snapshot.data[index].nama_kelas, namaMapel: snapshot.data[index].nama_mapel ,);
+                          return ListMateri(idMapel: snapshot.data[index].idMapel, idKelas: snapshot.data[index].idKelas ,);
                         }));
                   },
                                                   child: Card(
@@ -99,7 +99,7 @@ class _ListMapelState extends State<ListMapel> {
                                 padding: EdgeInsets.all(8.0),
                                 child: ListTile(
                                   title: Text(snapshot.data[index].nama_mapel),
-                                  subtitle: Text(snapshot.data[index].deskripsi),
+                                
                                 )),
                           ),
                         ),
