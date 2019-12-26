@@ -13,7 +13,7 @@ class ApiService{
     var data = {"nama_kelas": namaKelas, };
     final body = json.encode(data);
     print(body);
-    final res = await http.post("http://192.168.1.93:8000/mapel/get", headers: {"Content-Type": "application/json"}, body: body);
+    final res = await http.post("http://ec2-34-203-236-133.compute-1.amazonaws.com/mapel/get", headers: {"Content-Type": "application/json"}, body: body);
     final resResult = json.decode(res.body);
      if (resResult['data'] != null) {
       jurnal = (resResult['data'] as List)
@@ -31,7 +31,7 @@ class ApiService{
     var data = {"namaKelas": namaKelas, "namaMapel":namaMapel};
     final body = json.encode(data);
     print(body);
-    final res = await http.post("http://192.168.1.93:8000/mapel/getmateri", headers: {"Content-Type": "application/json"}, body: body);
+    final res = await http.post("http://ec2-34-203-236-133.compute-1.amazonaws.com/mapel/getmateri", headers: {"Content-Type": "application/json"}, body: body);
     final resResult = json.decode(res.body);
     print(resResult['data']);
     if (resResult['data'] != null) {
@@ -49,7 +49,7 @@ class ApiService{
      List<MateriDetailModel> detailMapel;
     var data = {"idMapel": idMapel, };
     final body = json.encode(data);
-    final res = await http.post("http://192.168.1.93:8000/mapel/detailmapel", headers: {"Content-Type": "application/json"}, body: body);
+    final res = await http.post("http://ec2-34-203-236-133.compute-1.amazonaws.com/mapel/detailmapel", headers: {"Content-Type": "application/json"}, body: body);
     final resResult = json.decode(res.body);
     if (resResult['data'] != null) {
       detailMapel = (resResult['data'] as List)
