@@ -1,17 +1,27 @@
+import 'dart:io';
+
 import 'package:carousel_pro/carousel_pro.dart';
+import 'package:etestt/View/ListKelas.dart';
 import 'package:flutter/material.dart';
 
 import 'Materi.dart';
 import 'View/Dashboard.dart';
+import 'View/ListSoal.dart';
 import 'View/alertdialog.dart';
+import 'View/quizpage.dart';
 
 void main() => runApp(MaterialApp(
+  theme: new ThemeData(primaryColor: Color.fromRGBO(58, 66, 86, 1.0)),
   debugShowCheckedModeBanner: false,
   title: 'Athfal Aplication',
   home:
   HomePage(),
   initialRoute: "/",
   routes: {
+    "/kelas" :(context)=>ListKelas(),
+    "/soal" :(context)=>ListSoal(),
+    
+
     AlertDialogPage.routeName: (context)=>AlertDialogPage(),
     MateriPage.routeName: (context)=>MateriPage()
   },

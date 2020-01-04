@@ -22,7 +22,6 @@ class _MateriDetailState extends State<MateriDetail> {
   Future<List<MateriDetailModel>> _mat;
   ApiService _apiServices = ApiService();
 
-
   final appBar = AppBar(
     title: Text("Materi Pelajaran"),
     backgroundColor: Colors.cyanAccent,
@@ -33,7 +32,7 @@ class _MateriDetailState extends State<MateriDetail> {
     // TODO: implement initState
     super.initState();
     _mat = _apiServices.getMateriDetail(1);
-    print("kesini kan"+widget.namaKelas);
+    print("kesini kan" + widget.namaKelas);
 
     //  items.addAll(duplicateItems);
   }
@@ -75,7 +74,7 @@ class _MateriDetailState extends State<MateriDetail> {
                         child: Text("Tidak ada Materi")),
                   );
                 } else {
-                  final _iuran = ListView.builder(
+                  final materi = ListView.builder(
                     itemCount: snapshot.data.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
@@ -88,31 +87,30 @@ class _MateriDetailState extends State<MateriDetail> {
                               title: Container(
                                 padding: EdgeInsets.only(bottom: 10.0),
                                 child: Text(
-                                  snapshot.data[index].namaMapel ,
+                                  snapshot.data[index].namaMapel,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20.0),
                                 ),
                               ),
-                            
                             ),
                             SizedBox(
                               height: 10.0,
                             ),
                             Container(
-                                width: MediaQuery.of(context).size.width,
-                                color: Colors.white,
-                                padding: EdgeInsets.all(15.0),
-                                child: Text(
-                                  snapshot.data[index].isi ,
-                                 
-                                ),),
+                              width: MediaQuery.of(context).size.width,
+                              color: Colors.white,
+                              padding: EdgeInsets.all(15.0),
+                              child: Text(
+                                snapshot.data[index].isi,
+                              ),
+                            ),
                           ],
                         ),
                       );
                     },
                   );
-                  return _iuran;
+                  return materi;
                 }
             }
           },

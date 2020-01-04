@@ -1,30 +1,31 @@
 
 import 'package:etestt/View/ListMapel.dart';
+import 'package:etestt/View/quizpage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../alertdialog.dart';
 import 'ListMateri.dart';
 
-class ListKelas extends StatefulWidget {
+class ListSoal extends StatefulWidget {
   @override
-  _ListKelasState createState() => _ListKelasState();
+  _ListSoalState createState() => _ListSoalState();
 }
 
-class _ListKelasState extends State<ListKelas> {
-  static final routeName = "/kelas";
-  final kelas = [
-    kelasModel('1', 'Kelas 1'),
-    kelasModel('2', 'Kelas 2'),
-    kelasModel('3', 'Kelas 3'),
-    kelasModel('4', 'Kelas 4'),
-    kelasModel('5', 'Kelas 5'),
-    kelasModel('6', 'Kelas 6'),
+class _ListSoalState extends State<ListSoal> {
+  final soal = [
+    soalModel('1', 'IPA'),
+    soalModel('2', 'Bahasa Indonesia'),
+    soalModel('3', 'Matematika'),
+    soalModel('4', 'IPS'),
+    soalModel('5', 'Bahasa Inggris'),
+    soalModel('6', 'Ketrampilan'),
 
   ];
 
   final appBar = CupertinoNavigationBar(
-    middle: Text("Pilih Kelas", style: TextStyle(color: Colors.white),),
+    middle: Text("Pilih Kuis", style: TextStyle(color: Colors.white),),
+    automaticallyImplyLeading: true,
     backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
   );
 
@@ -34,14 +35,14 @@ class _ListKelasState extends State<ListKelas> {
         backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
         appBar: appBar,
         body: ListView.builder(
-            itemCount: kelas.length,
+            itemCount: soal.length,
             itemBuilder: (BuildContext ctxt, int index) {
               return InkWell(
                 onTap: () {
-                  print("object");
+                  print(soal[index].soal);
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) {
-                        return ListMapel(idKelas: kelas[index].id,);
+                        return getjson( soal[index].soal,);
                       }));
                 },
                 child: Card(
@@ -49,7 +50,7 @@ class _ListKelasState extends State<ListKelas> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),
                     ),
-                    elevation: 3.0,
+                    elevation: 8.0,
                     child: Container(
                         alignment: Alignment.center,
                         height: 80.0,
@@ -57,22 +58,23 @@ class _ListKelasState extends State<ListKelas> {
                         width: MediaQuery.of(context).size.width,
                         child: ListTile(
                           title: Text(
-                            kelas[index].kelas,
-                            style: TextStyle(fontSize: 20.0,color: Colors.white),
+                            soal[index].soal,
+
+                            style: TextStyle(fontSize: 20.0, color: Colors.white),
                           ),
-                          trailing: Icon(Icons.arrow_forward_ios, color: Colors.white),
+                          trailing: Icon(Icons.arrow_forward_ios, color: Colors.white,),
                         ))),
               );
             }));
   }
 }
 
-class kelasModel {
+class soalModel {
 
   String id;
-  String kelas;
+  String soal;
 
-  kelasModel(this.id, this.kelas);
+  soalModel(this.id, this.soal);
 
 
 }

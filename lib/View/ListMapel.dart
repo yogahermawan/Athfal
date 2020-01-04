@@ -7,9 +7,9 @@ import 'package:flutter/material.dart';
 import '../alertdialog.dart';
 
 class ListMapel extends StatefulWidget {
-  final namaKelas;
+  final idKelas;
 
-  const ListMapel({Key key, this.namaKelas}) : super(key: key);
+  const ListMapel({Key key, this.idKelas}) : super(key: key);
 
   @override
   _ListMapelState createState() => _ListMapelState();
@@ -21,20 +21,18 @@ class _ListMapelState extends State<ListMapel> {
   Future<List<MapelModel>> _iur;
   ApiService _apiServices = ApiService();
 
-
-  final appBar = AppBar(
-    title: Text("Mata Pelajaran"),
-    backgroundColor: Colors.cyanAccent,
+  final appBar = CupertinoNavigationBar(
+    middle: Text("Mata Pelajaran" ,style: TextStyle(color: Colors.white),),
+    backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
   );
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _iur = _apiServices.getMapelList(widget.namaKelas);
+    _iur = _apiServices.getMapelList(widget.idKelas);
 
-
-    print("kesini kan"+widget.namaKelas);
+    print("kesini kan" + widget.idKelas);
 
     //  items.addAll(duplicateItems);
   }
@@ -42,6 +40,7 @@ class _ListMapelState extends State<ListMapel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
         appBar: appBar,
         body: FutureBuilder(
           future: _iur,
@@ -82,24 +81,27 @@ class _ListMapelState extends State<ListMapel> {
                       return Container(
                         padding: EdgeInsets.only(left: 5.0, right: 7.0),
                         width: MediaQuery.of(context).size.width,
-                        height: 100.0,
+                        height: 80.0,
                         child: InkWell(
                           onTap: () {
-                    print("object");
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                          return ListMateri(idMapel: snapshot.data[index].idMapel, idKelas: snapshot.data[index].idKelas ,);
-                        }));
-                  },
-                                                  child: Card(
+                            print("object");
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return ListMateri(
+                                idMapel: snapshot.data[index].idMapel,
+                                idKelas: snapshot.data[index].idKelas,
+                              );
+                            }));
+                          },
+                          child: Card(
+                            color: Color.fromRGBO(64, 75, 96, .9),
                             elevation: 5.0,
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15.0)),
-                            child: Container(
-                                padding: EdgeInsets.all(8.0),
+                                borderRadius: BorderRadius.circular(10.0)),
+                            child: Center(
                                 child: ListTile(
-                                  title: Text(snapshot.data[index].nama_mapel),
-                                
+                                  trailing: Icon(Icons.arrow_forward_ios, color: Colors.white),
+                                  title: Text(snapshot.data[index].nama_mapel,style: TextStyle(fontSize: 20.0, color: Colors.white),),
                                 )),
                           ),
                         ),

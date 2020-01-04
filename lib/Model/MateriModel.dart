@@ -1,21 +1,22 @@
 class MateriModel {
-  int id;
-  String idMapel;
-  String idMateri;
-  String idKelas;
-  String namaKelas;
+  int idMateri;
+  // String idMapel;
+ String namaFile;
   String namaMateri;
   String deskripsi;
-  
 
-  MateriModel({this.id, this.idMapel, this.idMateri, this.idKelas, this.deskripsi, this.namaKelas, this.namaMateri,});
+  MateriModel({
+  //  this.idMapel,
+    this.idMateri,
+    this.namaFile,
+     this.deskripsi,
+    this.namaMateri,
+  });
 
   MateriModel.fromJson(Map<String, dynamic> map)
-      : id = map['id'],
-        idMapel = map['idMapel'],
+      : //idMapel = map['idMapel'],
         idMateri = map['idMateri'],
-        idKelas = map['idKelas'],
-        deskripsi = map['deskripsi'],
-        namaKelas = map['namaKelas'],
+      namaFile = map['namaFile'],
+       deskripsi = map['deskripsi'],
         namaMateri = map['namaMateri'];
 }

@@ -1,0 +1,88 @@
+[
+    {
+        "1": "Kenampakan yang diciptakan oleh Tuhan disebut....",
+        "2": "Contoh kenampakan buatan adalah ....",
+        "3": "Manfaat gotong royong adalah ....",
+        "4": "Anggota keluarga yang berkedudukan sebagai kepala keluarga adalah ....",
+        "5": "Gambar yang menampakkan suatu permukaan bumi disebut ....",
+        "6": "Lingkungan yang sudah ada dengan sendirinya tanpa dibuat oleh manusia dinamakan lingkungan ....",
+        "7": "Kenampakan lingkungan alam merupakan ciptaan ....",
+        "8": "Genangan air yang luas yang dikelilingi daratan dinamakan ....",
+        "9": "Sawah dimanfaatkan oleh petani untuk ....",
+        "10": "Berikut ini yang termasuk lingkungan buatan adalah ...."
+    },
+    {
+        "1": {
+            "a": "Kenampakan buatan",
+            "b": "Kenampakan alam",
+            "c": "Kenampakan ciptaan",
+            "d": "Kenampakan alami"
+        },
+        "2": {
+            "a": "Lembah",
+            "b": "Pantai",
+            "c": "Laut",
+            "d": "Waduk"
+        },
+        "3": {
+            "a": "Memupuk persatuan",
+            "b": "Meningkatkan keamanan",
+            "c": "Memperoleh pujian",
+            "d": "Mendapatkan solidaritas"
+        },
+        "4": {
+            "a": "Ibu",
+            "b": "Ayah",
+            "c": "Kakak",
+            "d": "Adik"
+        },
+        "5": {
+            "a": "Denah",
+            "b": "Peta",
+            "c": "Bangunan",
+            "d": "Globe"
+        },
+        "6": {
+            "a": "Fisik",
+            "b": "Alam",
+            "c": "Buatan",
+            "d": "Hutan"
+        },
+        "7": {
+            "a": "Tuhan",
+            "b": "Tukang Kayu",
+            "c": "Petani",
+            "d": "Insinyur"
+        },
+        "8": {
+            "a": "Sungai",
+            "b": "Laut",
+            "c": "Danau",
+            "d": "Samudra"
+        },
+        "9": {
+            "a": "Merawat ikan",
+            "b": "Menjemur pakaian",
+            "c": "Menanam palawija",
+            "d": "Membuang sampah"
+        },
+        "10": {
+            "a": "Danau",
+            "b": "Gunung",
+            "c": "Kebun",
+            "d": "Pantai"
+        }
+    },
+    {
+        "1": "Kenampakan alam",
+        "2": "Waduk",
+        "3": "Memupuk persatuan",
+        "4": "Ayah",
+        "5": "Denah",
+        "6": "Alam",
+        "7": "Tuhan",
+        "8": "Danau",
+        "9": "Menanam palawija",
+        "10": "Kebun"
+    }
+]

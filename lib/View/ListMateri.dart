@@ -1,6 +1,7 @@
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:etestt/Provider/ApiService.dart';
 import 'package:etestt/View/MateriDetail.dart';
+import 'package:etestt/View/ViewPDF.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../Model/MateriModel.dart';
@@ -24,9 +25,11 @@ class _ListMateriState extends State<ListMateri> {
   ApiService _apiServices = ApiService();
 
 
-  final appBar = AppBar(
-    title: Text("Materi Pelajaran"),
-    backgroundColor: Colors.cyanAccent,
+  final appBar = CupertinoNavigationBar(
+    middle: Text("Materi Pelajaran", style: TextStyle(color: Colors.white)),
+    backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
+
+
   );
 
   @override
@@ -34,7 +37,7 @@ class _ListMateriState extends State<ListMateri> {
     // TODO: implement initState
     super.initState();
     _mat = _apiServices.getMateriList(widget.idMapel, widget.idKelas);
-    print("kesini kan"+widget.idKelas);
+    print("kesini aaakan"+widget.idKelas);
 
     //  items.addAll(duplicateItems);
   }
@@ -42,6 +45,7 @@ class _ListMateriState extends State<ListMateri> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
         appBar: appBar,
         body: FutureBuilder(
           future: _mat,
@@ -70,6 +74,7 @@ class _ListMateriState extends State<ListMateri> {
                   return refresh;
                 } else if (!snapshot.hasData) {
                   return Card(
+                    color: Color.fromRGBO(64, 75, 96, .9),
                     elevation: 4.0,
                     child: Padding(
                         padding: EdgeInsets.all(8.0),
@@ -85,21 +90,25 @@ class _ListMateriState extends State<ListMateri> {
                         height: 100.0,
                         child: InkWell(
                              onTap: () {
-                    print("object");
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                          return MateriDetail(namaKelas: snapshot.data[index].namaMateri,);
-                        }));
+                     print("object");
+                     print(snapshot.data[index].namaFile);
+                     print(snapshot.data[index].namaFile);
+                    // Navigator.push(context,
+                    //     MaterialPageRoute(builder: (context) {
+                    //       return ViewPDF(fileName: ,urlPdf: ,);
+                    //     }));
                   },
                           child: Card(
+                            color: Color.fromRGBO(64, 75, 96, .9),
                             elevation: 5.0,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15.0)),
                             child: Container(
                                 padding: EdgeInsets.all(8.0),
                                 child: ListTile(
-                                  title: Text(snapshot.data[index].namaMateri),
-                                  subtitle: Text(snapshot.data[index].deskripsi),
+                                  title: Text(snapshot.data[index].namaMateri, style: TextStyle(color: Colors.white),),
+                                  subtitle: Text(snapshot.data[index].deskripsi, style: TextStyle(color: Colors.white)),
+                                  trailing: Icon(Icons.arrow_forward_ios, color: Colors.white,),
                                 )),
                           ),
                         ),
