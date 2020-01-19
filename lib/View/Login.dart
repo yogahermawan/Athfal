@@ -108,7 +108,7 @@ class _LoginState extends State<Login> {
     final loginButon = Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(32.0),
-        color: Color.fromRGBO(64, 75, 96, .9),
+        color: Color.fromRGBO(192, 192, 192, .9),
 
       ),
 
