@@ -22,7 +22,7 @@ class _ListMapelState extends State<ListMapel> {
   ApiService _apiServices = ApiService();
 
   final appBar = CupertinoNavigationBar(
-    middle: Text("Mata Pelajaran" ,style: TextStyle(color: Colors.white),),
+    middle: Text("Materi Pelajaran" ,style: TextStyle(color: Colors.white),),
     backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
   );
 
