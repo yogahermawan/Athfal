@@ -28,16 +28,12 @@ class _HomePageState extends State<HomePage> {
           routes: "/hariBesarHistory"),
       MenuModel(
           title: "Tentang Aplikasi",
-          subtitle: "Data dan riwayat pengajuan tukar libur",
           icon: Icon(Icons.info, size: 30.0, color: Colors.grey,),
-          image: "images/icons/tukarlibur.png",
           routes: "/tukarLiburHistory"),
       MenuModel(
           title: "Latihan Soal",
-          subtitle: "Data dan riwayat pengajuan cuti",
-          icon: Icon(Icons.create, size: 30.0, color: Colors.grey,),
-          image: "images/icons/cuti.png",
-          routes: "/soal"),
+            icon: Icon(Icons.create, size: 30.0, color: Colors.grey,),
+           routes: "/soal"),
       MenuModel(
           title: "Materi Pelajaran",
           icon: Icon(Icons.book, size: 30.0, color: Colors.grey,),
@@ -80,7 +76,7 @@ class _HomePageState extends State<HomePage> {
     final gridBuilder = new Container(
 
         decoration: new BoxDecoration(
-            color: Color.fromRGBO(58, 66, 86, 1.0),
+            color: Colors.white,
             borderRadius: new BorderRadius.only(
                 topLeft: const Radius.circular(30.0),
                 topRight: const Radius.circular(30.0))),
@@ -99,7 +95,6 @@ class _HomePageState extends State<HomePage> {
               return Container(
                 padding: const EdgeInsets.all(0.0),
                 child: Card(
-                  color: Color.fromRGBO(64, 75, 96, .9),
                   elevation: 0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
@@ -154,7 +149,6 @@ class _HomePageState extends State<HomePage> {
         Column(
           children: <Widget>[
           SizedBox(
-
           height: MediaQuery.of(context).size.height*0.4,
         ),
             gridBuilder
@@ -162,102 +156,5 @@ class _HomePageState extends State<HomePage> {
             )
       ],
     );
-//    return Stack(
-//      children: <Widget>[
-//        image_nggeser,
-//        Scaffold(
-//          backgroundColor: Colors.transparent,
-//          appBar: AppBar(
-//            backgroundColor: Colors.transparent,
-//            actions: <Widget>[
-//              FlatButton(
-//                shape: CircleBorder(),
-//                child: Icon(Icons.person),
-//                onPressed: () {
-//                  print("object");
-//                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-//                    return Login();
-//                  }));
-//                },
-//              )
-//            ],
-//          ),
-//          body: Container(
-//            color: Colors.transparent,
-//            child: ListView(
-//              children: <Widget>[
-//
-//                gridBuilder
-////          Center(
-////            child: Column(
-////              mainAxisAlignment: MainAxisAlignment.center,
-////              children: [
-////                GestureDetector(
-////                  onTap: () {
-////                    Navigator.push(context,
-////                        MaterialPageRoute(builder: (context) {
-////                      return ListKelas();
-////                    }));
-////                  },
-////                  child: Container(
-////                    decoration: BoxDecoration(
-////                      borderRadius: BorderRadius.circular(100.0),
-////                      gradient: LinearGradient(
-////                        colors: <Color>[
-////                          Color(0xFF31A8D1),
-////                          Color(0xff2293B9),
-////                          Color(0xFF0A7EA6),
-////                        ],
-////                      ),
-////
-////                      // Color(0xFF0A7EA6)
-////                    ),
-////                    width: double.infinity,
-////                    margin: EdgeInsets.all(25.0),
-////                    height: 50.0,
-////                    child: Center(
-////                      child: Text(
-////                        "Materi Pelajaran",
-////                        style: TextStyle(color: Colors.white, fontSize: 18.0),
-////                      ),
-////                    ),
-////                  ),
-////                ),
-////                GestureDetector(
-////                  child: Container(
-////                    width: double.infinity,
-////                    color: Colors.yellow,
-////                    margin: EdgeInsets.all(25.0),
-////                    height: 50.0,
-////                    child: Card(
-////                      child: Center(
-////                        child: Text("Latihan Soal"),
-////                      ),
-////                    ),
-////                  ),
-////                ),
-////                GestureDetector(
-////                  child: Container(
-////                    width: double.infinity,
-////                    color: Colors.yellow,
-////                    margin: EdgeInsets.all(25.0),
-////                    height: 50.0,
-////                    child: Card(
-////                      child: Center(
-////                        child: Text("Tentang Aplikasi"),
-////                      ),
-////                    ),
-////                  ),
-////                ),
-////              ],
-////            ),
-////          ),
-//              ],
-//            ),
-//          ),
-//        ),
-//      ],
-//
-//    );
   }
 }

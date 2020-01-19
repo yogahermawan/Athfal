@@ -1,8 +1,14 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:carousel_pro/carousel_pro.dart';
+import 'package:etestt/Model/KelasMode.dart';
+//import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:etestt/Provider/ApiService.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart' as http;
 
 import '../alertdialog.dart';
 import 'Dashboard.dart';
@@ -16,16 +22,55 @@ class InputMateri extends StatefulWidget {
 
 class _InputMateriState extends State<InputMateri> {
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
-  final _username = TextEditingController();
-  final _password = TextEditingController();
+  final _judulMateri = TextEditingController();
+  final _materi = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  Future<List<KelasModel_>> _ber;
+  static List data = List();
+  static String _mySelection;
+
+  static List<kelasModel> getKelas() {
+    return <kelasModel>[
+      kelasModel('1', 'Kelas 1'),
+      kelasModel('2', 'Kelas 2'),
+      kelasModel('3', 'Kelas 3'),
+      kelasModel('4', 'Kelas 4'),
+      kelasModel('5', 'Kelas 5'),
+      kelasModel('6', 'Kelas 6'),
+    ];
+  }
+
+  List<kelasModel> _kelas = getKelas();
+  List<DropdownMenuItem<kelasModel>> _dropdownMenuItems;
+  kelasModel _selecetedkelas;
+
   bool _saving = false;
   ApiService apiServices;
 
   @override
   void initState() {
     super.initState();
-    apiServices = ApiService();
+    _dropdownMenuItems = buildDropdownMenuItems(_kelas);
+    _selecetedkelas = _dropdownMenuItems[0].value;
+  }
+
+  List<DropdownMenuItem<kelasModel>> buildDropdownMenuItems(List kelas) {
+    List<DropdownMenuItem<kelasModel>> items = List();
+    for (kelasModel kelas_ in kelas) {
+      items.add(
+        DropdownMenuItem(
+          value: kelas_,
+          child: Text(kelas_.kelas),
+        ),
+      );
+    }
+    return items;
+  }
+
+  onChangeDropdownItem(kelasModel selecetedkelas) {
+    setState(() {
+      _selecetedkelas = selecetedkelas;
+    });
   }
 
   void showToast(String msg) {
@@ -37,46 +82,21 @@ class _InputMateriState extends State<InputMateri> {
     );
   }
 
-  void login(String username, String password) {
-    var body = {"username": username, "password": password};
-    setState(() {
-      _saving = true;
-    });
-    apiServices.login(body).then((value) async {
-      setState(() {
-        _saving = false;
-      });
-      print('ini respon code');
-      print(value.username);
-      if (value.message == 401) {
-        setState(() {
-          _saving = false;
-        });
-        showToast('Username tidak ada');
-      } else {
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (context) => HomePage()),
-            (Route<dynamic> route) => false);
-      }
-    });
-    setState(() {
-      _saving = true;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    final emailField = Container(
+    final judulMateri = Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text("Judul Materi", style: TextStyle(color: Colors.white),),
+          Text(
+            "Judul Materi",
+          ),
           SizedBox(
             height: 10.0,
           ),
           TextFormField(
-            controller: _username,
+            controller: _judulMateri,
             obscureText: false,
             //  validator: (val) => val.isEmpty  ? "Harap isi username" : null,
             style: style,
@@ -90,15 +110,43 @@ class _InputMateriState extends State<InputMateri> {
     );
 
     final kelasField = Container(
+      width: MediaQuery.of(context).size.width,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text("Kelas",  style: TextStyle(color: Colors.white)),
+          Container(
+              child: Text(
+            "Kelas",
+          )),
+          SizedBox(
+            height: 10.0,
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.all(8.0),
+            child: DropdownButton(
+              value: _selecetedkelas,
+              items: _dropdownMenuItems,
+              onChanged: onChangeDropdownItem,
+            ),
+          ),
+        ],
+      ),
+    );
+
+    final isiMateri = Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            "Isi Materi",
+          ),
           SizedBox(
             height: 10.0,
           ),
           TextFormField(
-            controller: _username,
+            maxLines: 10,
+            controller: _materi,
             obscureText: false,
             //  validator: (val) => val.isEmpty  ? "Harap isi username" : null,
             style: style,
@@ -111,7 +159,6 @@ class _InputMateriState extends State<InputMateri> {
       ),
     );
 
-
     final loginButon = Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
@@ -120,9 +167,25 @@ class _InputMateriState extends State<InputMateri> {
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
-          // if (_formKey.currentState.validate()) {
-          login(_username.text, _password.text);
-          //  }
+
+
+
+          apiServices.postMateri(_selecetedkelas.id, _judulMateri.text, _materi.text).then((value) async {
+            setState(() {
+              _saving = false;
+            });
+            if (value.message == 401) {
+              setState(() {
+                _saving = false;
+              });
+              showToast('Gagal');
+            } else {
+              showToast('Berhasil Input Materi');
+            }
+          });
+          setState(() {
+            _saving = true;
+          });
         },
         child: Text("Input Materi",
             textAlign: TextAlign.center,
@@ -131,7 +194,7 @@ class _InputMateriState extends State<InputMateri> {
       ),
     );
 
-     Future _logOut() async {
+    Future _logOut() async {
       setState(() {
         _saving = true;
       });
@@ -143,7 +206,7 @@ class _InputMateriState extends State<InputMateri> {
       });
     }
 
-_showDialog() {
+    _showDialog() {
       showDialog(
           context: context,
           builder: (context) {
@@ -174,12 +237,11 @@ _showDialog() {
           });
     }
 
-   void chooseAction(String choice) {
-      
-        _showDialog();
-      
+    void chooseAction(String choice) {
+      _showDialog();
     }
-     final popMenu = PopupMenuButton(
+
+    final popMenu = PopupMenuButton(
       onSelected: chooseAction,
       itemBuilder: (context) {
         final dropDown = Constants.choices.map((String choice) {
@@ -203,30 +265,33 @@ _showDialog() {
     );
 
     final appBar = CupertinoNavigationBar(
-      middle: Text("Input Materi", style: TextStyle(color:Colors.white),),
-      backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
+      middle: Text(
+        "Input Materi",
+      ),
       trailing: popMenu,
       automaticallyImplyLeading: true,
     );
 
     return Scaffold(
-        appBar:appBar,
-        backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
+        appBar: appBar,
         body: SingleChildScrollView(
           child: Center(
             child: Container(
-              color:Color.fromRGBO(58, 66, 86, 1.0),
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    emailField,
-                    SizedBox(height: 25.0),
                     kelasField,
+                    SizedBox(height: 25.0),
+                    judulMateri,
                     SizedBox(
                       height: 35.0,
+                    ),
+                    isiMateri,
+                    SizedBox(
+                      height: 15.0,
                     ),
                     loginButon,
                     SizedBox(
@@ -241,10 +306,8 @@ _showDialog() {
   }
 }
 
-
 class Constants {
   static const Logout = 'Logout';
-
 
   static const List<String> choices = <String>[Logout];
 }
