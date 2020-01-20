@@ -26,7 +26,7 @@ class _ListMateriState extends State<ListMateri> {
 
 
   final appBar = CupertinoNavigationBar(
-    middle: Text("Materi Pelajaran", ),
+    middle: Text("Ayo Belajar", ),
    );
 
   @override
