@@ -98,7 +98,6 @@ class _LoginState extends State<Login> {
       //validator: (val) => val.length < 1 ? "Harap isi Password" : null,
       style: style,
       decoration: InputDecoration(
-        fillColor: Color.fromRGBO(64, 75, 96, .9),
           contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
           hintText: "Password",
           border:
@@ -124,23 +123,20 @@ class _LoginState extends State<Login> {
         child: Text("Login",
             textAlign: TextAlign.center,
             style: style.copyWith(
-                color: Colors.white, fontWeight: FontWeight.bold)),
+                color: Colors.black, fontWeight: FontWeight.bold)),
       ),
     );
 
     final appBar = CupertinoNavigationBar(
-      middle: Text("Login", style: TextStyle( color: Colors.white),
+      middle: Text("Login",
       ),
-      backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
       automaticallyImplyLeading: true,
     );
     return Scaffold(
-        backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
         appBar: appBar,
         body: SingleChildScrollView(
           child: Center(
             child: Container(
-              color: Color.fromRGBO(58, 66, 86, 1.0),
             child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Column(

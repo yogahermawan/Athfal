@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:math';
 import 'package:etestt/View/Dashboard.dart';
 import 'package:etestt/View/resultpage.dart';
 import 'package:flutter/material.dart';
@@ -18,27 +19,24 @@ class getjson extends StatelessWidget {
   // sets the asset to a particular JSON file
   // and opens the JSON
   setasset() {
-    print('langname =>'+langname);
+    print('langname =>' + langname);
     if (langname == "IPA") {
       assettoload = "assets/soal/ipa.json";
     } else if (langname == "IPS") {
       assettoload = "assets/soal/ips.json";
-      print('Asset Load ==>'+assettoload);
+      print('Asset Load ==>' + assettoload);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    // this function is called before the build so that
-    // the string assettoload is avialable to the DefaultAssetBuilder
     setasset();
-    // and now we return the FutureBuilder to load and decode JSON
     return FutureBuilder(
       future:
           DefaultAssetBundle.of(context).loadString(assettoload, cache: true),
       builder: (context, snapshot) {
         List mydata = json.decode(snapshot.data.toString());
-        print("Json data =>"+snapshot.data.toString());
+        print("Json data =>" + snapshot.data.toString());
         if (mydata == null) {
           return Scaffold(
             body: Center(
@@ -92,9 +90,9 @@ class _quizpageState extends State<quizpage> {
 
   // import 'dart:math';
 
-  //   var random_array;
-  //   var distinctIds = [];
-  //   var rand = new Random();
+  var random_array;
+  var distinctIds = [];
+  var rand = new Random();
   //     for (int i = 0; ;) {
   //     distinctIds.add(rand.nextInt(10));
   //       random_array = distinctIds.toSet().toList();
@@ -106,13 +104,27 @@ class _quizpageState extends State<quizpage> {
   //     }
   //   print(random_array);
 
+  void randomArray() {
+    for (int i = 0;;) {
+      distinctIds.add(rand.nextInt(10));
+      random_array = distinctIds.toSet().toList();
+      if (random_array.length < 10) {
+        continue;
+      } else {
+        break;
+      }
+    }
+    print(random_array);
+  }
+
   // ----- END OF CODE
-  var random_array = [1, 6, 7, 2, 4, 10, 8, 3, 9, 5];
+  //var random_array = [1, 6, 7, 2, 4, 10, 8, 3, 9, 5];
 
   // overriding the initstate function to start timer as this screen is created
   @override
   void initState() {
     starttimer();
+    randomArray();
     super.initState();
   }
 
@@ -162,8 +174,8 @@ class _quizpageState extends State<quizpage> {
   }
 
   void checkanswer(String k) {
-  if (mydata[2][i.toString()] == mydata[1][i.toString()][k]) {
-        marks = marks + 5;
+    if (mydata[2][i.toString()] == mydata[1][i.toString()][k]) {
+      marks = marks + 5;
       // changing the color variable to be green
       colortoshow = right;
     } else {
@@ -188,33 +200,32 @@ class _quizpageState extends State<quizpage> {
         horizontal: 20.0,
       ),
       child: InkWell(
-        onTap: () => checkanswer(k),
-        child: Container(
-          height: 50.0,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            boxShadow:  <BoxShadow>[
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.4),
-                blurRadius: 10,
-                offset: Offset(0, 5),
+          onTap: () => checkanswer(k),
+          child: Container(
+              height: 50.0,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                boxShadow: <BoxShadow>[
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.4),
+                    blurRadius: 10,
+                    offset: Offset(0, 5),
+                  ),
+                ],
+                borderRadius: new BorderRadius.only(
+                    topLeft: const Radius.circular(30.0),
+                    bottomLeft: const Radius.circular(30.0)),
+                color: btncolor[k],
               ),
-            ],
-            borderRadius: new BorderRadius.only(
-                topLeft: const Radius.circular(30.0),
-                bottomLeft: const Radius.circular(30.0)),
-           color: btncolor[k],
-          ),
-          child: Text(
-        mydata[1][i.toString()][k],
-        style: TextStyle(
-          color: Colors.white,
-          fontFamily: "Alike",
-          fontSize: 16.0,
-        ),
-        maxLines: 1,
-    )
-        )
+              child: Text(
+                mydata[1][i.toString()][k],
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: "Alike",
+                  fontSize: 16.0,
+                ),
+                maxLines: 1,
+              ))
 //          MaterialButton(
 //            onPressed: () => checkanswer(k),
 //            child: Text(
@@ -234,7 +245,7 @@ class _quizpageState extends State<quizpage> {
 //
 //          ),
 
-      ),
+          ),
     );
   }
 
@@ -247,13 +258,14 @@ class _quizpageState extends State<quizpage> {
         return showDialog(
             context: context,
             builder: (context) => AlertDialog(
-              backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
+                  backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
                   title: Text(
                     "Kuis",
                     style: TextStyle(color: Colors.white),
                   ),
-                  content: Text("Kamu tidak dapat kembali ke Kuis ini",
-                      style: TextStyle(color: Colors.white),
+                  content: Text(
+                    "Kamu tidak dapat kembali ke Kuis ini",
+                    style: TextStyle(color: Colors.white),
                   ),
                   actions: <Widget>[
                     FlatButton(
@@ -261,7 +273,7 @@ class _quizpageState extends State<quizpage> {
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(builder: (context) => HomePage()),
-                                (Route<dynamic> route) => false);
+                            (Route<dynamic> route) => false);
                       },
                       child: Text(
                         'Ok',
@@ -278,7 +290,7 @@ class _quizpageState extends State<quizpage> {
             Expanded(
               flex: 3,
               child: Container(
-               padding: EdgeInsets.all(15.0),
+                padding: EdgeInsets.all(15.0),
                 alignment: Alignment.bottomLeft,
                 child: Text(
                   mydata[0][i.toString()],
@@ -287,7 +299,6 @@ class _quizpageState extends State<quizpage> {
                     fontSize: 20.0,
                     color: Colors.white,
                     fontFamily: "Alike",
-
                   ),
                 ),
               ),
@@ -312,8 +323,7 @@ class _quizpageState extends State<quizpage> {
                 alignment: Alignment.topCenter,
                 child: Center(
                   child: Text(
-                    "Sisa Waktu : "+
-                    showtimer,
+                    "Sisa Waktu : " + showtimer,
                     style: TextStyle(
                       fontSize: 30.0,
                       color: Colors.white,

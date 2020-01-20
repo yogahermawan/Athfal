@@ -24,14 +24,13 @@ class _ListKelasState extends State<ListKelas> {
   ];
 
   final appBar = CupertinoNavigationBar(
-    middle: Text("Pilih Kelas", style: TextStyle(color: Colors.white),),
-    backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
+    middle: Text("Pilih Kelas",),
+ //   backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
   );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
         appBar: appBar,
         body: ListView.builder(
             itemCount: kelas.length,
@@ -41,12 +40,14 @@ class _ListKelasState extends State<ListKelas> {
                   print("object");
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) {
-                        return ListMapel(idKelas: kelas[index].id,);
+                        return ListMateri(
+                           idKelas: kelas[index].id,
+                          );
+
                       }));
                 },
                 child: Card(
-                    color: Color.fromRGBO(64, 75, 96, .9),
-                    shape: RoundedRectangleBorder(
+                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     elevation: 3.0,
@@ -58,9 +59,8 @@ class _ListKelasState extends State<ListKelas> {
                         child: ListTile(
                           title: Text(
                             kelas[index].kelas,
-                            style: TextStyle(fontSize: 20.0,color: Colors.white),
                           ),
-                          trailing: Icon(Icons.arrow_forward_ios, color: Colors.white),
+                          trailing: Icon(Icons.arrow_forward_ios, ),
                         ))),
               );
             }));

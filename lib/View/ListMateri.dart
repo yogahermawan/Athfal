@@ -26,17 +26,14 @@ class _ListMateriState extends State<ListMateri> {
 
 
   final appBar = CupertinoNavigationBar(
-    middle: Text("Materi Pelajaran", style: TextStyle(color: Colors.white)),
-    backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
-
-
-  );
+    middle: Text("Materi Pelajaran", ),
+   );
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _mat = _apiServices.getMateriList(widget.idMapel, widget.idKelas);
+    _mat = _apiServices.getMateriList(widget.idKelas);
     print("kesini aaakan"+widget.idKelas);
 
     //  items.addAll(duplicateItems);
@@ -45,7 +42,6 @@ class _ListMateriState extends State<ListMateri> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
         appBar: appBar,
         body: FutureBuilder(
           future: _mat,
@@ -74,14 +70,13 @@ class _ListMateriState extends State<ListMateri> {
                   return refresh;
                 } else if (!snapshot.hasData) {
                   return Card(
-                    color: Color.fromRGBO(64, 75, 96, .9),
                     elevation: 4.0,
                     child: Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text("Tidak ada Materi")),
                   );
                 } else {
-                  final _iuran = ListView.builder(
+                  final _materi = ListView.builder(
                     itemCount: snapshot.data.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
@@ -90,32 +85,27 @@ class _ListMateriState extends State<ListMateri> {
                         height: 100.0,
                         child: InkWell(
                              onTap: () {
-                     print("object");
-                     print(snapshot.data[index].namaFile);
-                     print(snapshot.data[index].namaFile);
-                    // Navigator.push(context,
-                    //     MaterialPageRoute(builder: (context) {
-                    //       return ViewPDF(fileName: ,urlPdf: ,);
-                    //     }));
+                     Navigator.push(context,
+                         MaterialPageRoute(builder: (context) {
+                           return MateriDetail(idMateri: snapshot.data[index].idMateri);
+                         }));
                   },
                           child: Card(
-                            color: Color.fromRGBO(64, 75, 96, .9),
                             elevation: 5.0,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15.0)),
                             child: Container(
                                 padding: EdgeInsets.all(8.0),
                                 child: ListTile(
-                                  title: Text(snapshot.data[index].namaMateri, style: TextStyle(color: Colors.white),),
-                                  subtitle: Text(snapshot.data[index].deskripsi, style: TextStyle(color: Colors.white)),
-                                  trailing: Icon(Icons.arrow_forward_ios, color: Colors.white,),
+                                  title: Text(snapshot.data[index].namaMateri, ),
+                                 trailing: Icon(Icons.arrow_forward_ios,),
                                 )),
                           ),
                         ),
                       );
                     },
                   );
-                  return _iuran;
+                  return _materi;
                 }
             }
           },

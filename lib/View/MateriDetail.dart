@@ -8,9 +8,9 @@ import '../Model/MateriModel.dart';
 import '../alertdialog.dart';
 
 class MateriDetail extends StatefulWidget {
-  final namaKelas;
+  final int idMateri;
 
-  const MateriDetail({Key key, this.namaKelas}) : super(key: key);
+  const MateriDetail({Key key, this.idMateri}) : super(key: key);
 
   @override
   _MateriDetailState createState() => _MateriDetailState();
@@ -19,20 +19,19 @@ class MateriDetail extends StatefulWidget {
 class _MateriDetailState extends State<MateriDetail> {
   static final routeName = "/kelas";
   //final duplicateItems = getMateri();
-  Future<List<MateriDetailModel>> _mat;
+  Future<List<MateriModel>> _mat;
   ApiService _apiServices = ApiService();
 
-  final appBar = AppBar(
-    title: Text("Materi Pelajaran"),
-    backgroundColor: Colors.cyanAccent,
+  final appBar = CupertinoNavigationBar(
+    middle: Text("Materi Pelajaran"),
   );
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _mat = _apiServices.getMateriDetail(1);
-    print("kesini kan" + widget.namaKelas);
+    _mat = _apiServices.getMateriDetail(widget.idMateri);
+    print("kesini kan" );
 
     //  items.addAll(duplicateItems);
   }
@@ -87,7 +86,7 @@ class _MateriDetailState extends State<MateriDetail> {
                               title: Container(
                                 padding: EdgeInsets.only(bottom: 10.0),
                                 child: Text(
-                                  snapshot.data[index].namaMapel,
+                                  snapshot.data[index].namaMateri,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20.0),
@@ -102,7 +101,7 @@ class _MateriDetailState extends State<MateriDetail> {
                               color: Colors.white,
                               padding: EdgeInsets.all(15.0),
                               child: Text(
-                                snapshot.data[index].isi,
+                                snapshot.data[index].isiMateri,
                               ),
                             ),
                           ],
