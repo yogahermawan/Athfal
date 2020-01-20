@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
             icon: Icon(Icons.create, size: 30.0, color: Colors.grey,),
            routes: "/soal"),
       MenuModel(
-          title: "Materi Pelajaran",
+          title: "Ayo Belajar",
           icon: Icon(Icons.book, size: 30.0, color: Colors.grey,),
           routes: "/kelas"),
     ].reversed.toList();
@@ -60,9 +60,9 @@ class _HomePageState extends State<HomePage> {
       boxFit: BoxFit.fill,
       images: [
         AssetImage('assets/img/img2.jpg'),
+        AssetImage('assets/img/img1.jpg'),
         AssetImage('assets/img/img2.jpg'),
-        AssetImage('assets/img/img2.jpg'),
-        AssetImage('assets/img/img2.jpg'),
+        AssetImage('assets/img/img1.jpg'),
         AssetImage('assets/img/img2.jpg'),
       ],
       showIndicator: false,
