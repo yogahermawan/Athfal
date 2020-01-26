@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class MateriModel {
   int idMateri;
   String idKelas;
@@ -11,9 +13,11 @@ class MateriModel {
     this.namaMateri,
   });
 
-  MateriModel.fromJson(Map<String, dynamic> map)
-      : idKelas = map['idKelas'],
-        idMateri = map['idMateri'],
-        isiMateri = map['isiMateri'],
-        namaMateri = map['namaMateri'];
+ factory MateriModel.fromJson(Map<String, dynamic> json)=> MateriModel(
+    idMateri: json['idMateri'],
+    idKelas: json['idKelas'],
+    namaMateri: json['namaMateri'],
+    isiMateri:  json['isiMateri']
+  );
+      
 }

@@ -18,25 +18,36 @@ class _HomePageState extends State<HomePage> {
   static List<MenuModel> getMenus() {
     return <MenuModel>[
       MenuModel(
-          title: "Keluar",
+        title: "Keluar",
+        icon: Icon(
+          Icons.exit_to_app,
+          size: 30.0,
+          color: Colors.grey,
+        ),
+      ),
+      MenuModel(
+          title: "Tentang Aplikasi",
           icon: Icon(
-            Icons.exit_to_app,
+            Icons.info,
             size: 30.0,
             color: Colors.grey,
           ),
-
-          routes: "/hariBesarHistory"),
-      MenuModel(
-          title: "Tentang Aplikasi",
-          icon: Icon(Icons.info, size: 30.0, color: Colors.grey,),
           routes: "/tukarLiburHistory"),
       MenuModel(
           title: "Latihan Soal",
-            icon: Icon(Icons.create, size: 30.0, color: Colors.grey,),
-           routes: "/soal"),
+          icon: Icon(
+            Icons.create,
+            size: 30.0,
+            color: Colors.grey,
+          ),
+         ),
       MenuModel(
           title: "Materi Pelajaran",
-          icon: Icon(Icons.book, size: 30.0, color: Colors.grey,),
+          icon: Icon(
+            Icons.book,
+            size: 30.0,
+            color: Colors.grey,
+          ),
           routes: "/kelas"),
     ].reversed.toList();
   }
@@ -74,7 +85,6 @@ class _HomePageState extends State<HomePage> {
 
   Widget build(BuildContext context) {
     final gridBuilder = new Container(
-
         decoration: new BoxDecoration(
             color: Colors.white,
             borderRadius: new BorderRadius.only(
@@ -86,11 +96,11 @@ class _HomePageState extends State<HomePage> {
             physics: const NeverScrollableScrollPhysics(),
             itemCount: items.length,
             shrinkWrap: true,
-            gridDelegate:
-                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,
-                  childAspectRatio: MediaQuery.of(context).size.width /
-                      (MediaQuery.of(context).size.height / 2),
-                ),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: MediaQuery.of(context).size.width /
+                  (MediaQuery.of(context).size.height / 2),
+            ),
             itemBuilder: (context, index) {
               return Container(
                 padding: const EdgeInsets.all(0.0),
@@ -102,10 +112,15 @@ class _HomePageState extends State<HomePage> {
                   child: InkWell(
                     borderRadius: BorderRadius.all(Radius.circular(20.0)),
                     onTap: () {
-                      if (items[index].routes.isNotEmpty) {
-                        Navigator.pushNamed(context, items[index].routes);
-                      } else if ( items[index].title == 'Keluar'){
+                       if (items[index].title == 'Keluar') {
                         exit(0);
+                      } else if (items[index].title == 'Latihan Soal' || items[index].title =='Materi Pelajaran') {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return ListKelas(
+                            title: items[index].title,
+                          );
+                        }));
                       }
                     },
                     child: Container(
@@ -115,8 +130,12 @@ class _HomePageState extends State<HomePage> {
                         children: <Widget>[
                           items[index].icon,
                           Padding(
-                              padding: const EdgeInsets.only(top: 1.0),
-                              child: Text(items[index].title, style: TextStyle(color: Colors.grey),), )
+                            padding: const EdgeInsets.only(top: 1.0),
+                            child: Text(
+                              items[index].title,
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                          )
                         ],
                       ),
                     ),
@@ -148,12 +167,12 @@ class _HomePageState extends State<HomePage> {
         ),
         Column(
           children: <Widget>[
-          SizedBox(
-          height: MediaQuery.of(context).size.height*0.4,
-        ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.4,
+            ),
             gridBuilder
           ],
-            )
+        )
       ],
     );
   }

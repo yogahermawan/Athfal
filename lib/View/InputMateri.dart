@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:etestt/Model/KelasMode.dart';
+import 'package:etestt/Model/MateriModel.dart';
 //import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -52,6 +53,7 @@ class _InputMateriState extends State<InputMateri> {
     super.initState();
     _dropdownMenuItems = buildDropdownMenuItems(_kelas);
     _selecetedkelas = _dropdownMenuItems[0].value;
+    apiServices=ApiService();
   }
 
   List<DropdownMenuItem<kelasModel>> buildDropdownMenuItems(List kelas) {
@@ -76,7 +78,7 @@ class _InputMateriState extends State<InputMateri> {
   void showToast(String msg) {
     Fluttertoast.showToast(
       msg: msg,
-      toastLength: Toast.LENGTH_SHORT,
+      toastLength: Toast.LENGTH_LONG,
       timeInSecForIos: 1,
       gravity: ToastGravity.BOTTOM,
     );
@@ -167,25 +169,14 @@ class _InputMateriState extends State<InputMateri> {
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
+      
 
+       apiServices.postMateri(_selecetedkelas.id.toString(),_judulMateri.text, _materi.text).then((value) async{
 
-
-          apiServices.postMateri(_selecetedkelas.id, _judulMateri.text, _materi.text).then((value) async {
-            setState(() {
-              _saving = false;
-            });
-            if (value.message == 401) {
-              setState(() {
-                _saving = false;
-              });
-              showToast('Gagal');
-            } else {
-              showToast('Berhasil Input Materi');
-            }
-          });
-          setState(() {
-            _saving = true;
-          });
+        showToast('Berhasil Input Data');
+      
+    
+    });    
         },
         child: Text("Input Materi",
             textAlign: TextAlign.center,

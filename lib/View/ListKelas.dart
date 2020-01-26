@@ -1,12 +1,16 @@
-
 import 'package:etestt/View/ListMapel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../alertdialog.dart';
 import 'ListMateri.dart';
+import 'ListSoal.dart';
 
 class ListKelas extends StatefulWidget {
+  final String title;
+
+  ListKelas({this.title});
+
   @override
   _ListKelasState createState() => _ListKelasState();
 }
@@ -20,12 +24,13 @@ class _ListKelasState extends State<ListKelas> {
     kelasModel('4', 'Kelas 4'),
     kelasModel('5', 'Kelas 5'),
     kelasModel('6', 'Kelas 6'),
-
   ];
 
   final appBar = CupertinoNavigationBar(
-    middle: Text("Pilih Kelas",),
- //   backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
+    middle: Text(
+      "Pilih Kelas",
+    ),
+    //   backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
   );
 
   @override
@@ -35,19 +40,28 @@ class _ListKelasState extends State<ListKelas> {
         body: ListView.builder(
             itemCount: kelas.length,
             itemBuilder: (BuildContext ctxt, int index) {
+              print("===============>");
+              print(widget.title);
               return InkWell(
                 onTap: () {
-                  print("object");
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) {
-                        return ListMateri(
-                           idKelas: kelas[index].id,
-                          );
-
-                      }));
+                  if (widget.title == "Latihan Soal") {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return ListSoal(
+                        kelas: kelas[index].id
+                      );
+                    }));
+                  } else {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return ListMateri(
+                        idKelas: kelas[index].id,
+                      );
+                    }));
+                  }
                 },
                 child: Card(
-                     shape: RoundedRectangleBorder(
+                    shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     elevation: 3.0,
@@ -60,7 +74,9 @@ class _ListKelasState extends State<ListKelas> {
                           title: Text(
                             kelas[index].kelas,
                           ),
-                          trailing: Icon(Icons.arrow_forward_ios, ),
+                          trailing: Icon(
+                            Icons.arrow_forward_ios,
+                          ),
                         ))),
               );
             }));
@@ -68,11 +84,8 @@ class _ListKelasState extends State<ListKelas> {
 }
 
 class kelasModel {
-
   String id;
   String kelas;
 
   kelasModel(this.id, this.kelas);
-
-
 }

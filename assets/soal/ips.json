@@ -1,5 +1,7 @@
 [
     {
+        
+        "0": "Berikut ini yang termasuk lingkungan buatan adalah ....",
         "1": "Kenampakan yang diciptakan oleh Tuhan disebut....",
         "2": "Contoh kenampakan buatan adalah ....",
         "3": "Manfaat gotong royong adalah ....",
@@ -8,10 +10,15 @@
         "6": "Lingkungan yang sudah ada dengan sendirinya tanpa dibuat oleh manusia dinamakan lingkungan ....",
         "7": "Kenampakan lingkungan alam merupakan ciptaan ....",
         "8": "Genangan air yang luas yang dikelilingi daratan dinamakan ....",
-        "9": "Sawah dimanfaatkan oleh petani untuk ....",
-        "10": "Berikut ini yang termasuk lingkungan buatan adalah ...."
+        "9": "Sawah dimanfaatkan oleh petani untuk ...."
     },
     {
+        "0": {
+            "a": "Danau",
+            "b": "Gunung",
+            "c": "Kebun",
+            "d": "Pantai"
+        },
         "1": {
             "a": "Kenampakan buatan",
             "b": "Kenampakan alam",
@@ -65,15 +72,11 @@
             "b": "Menjemur pakaian",
             "c": "Menanam palawija",
             "d": "Membuang sampah"
-        },
-        "10": {
-            "a": "Danau",
-            "b": "Gunung",
-            "c": "Kebun",
-            "d": "Pantai"
         }
+        
     },
     {
+        "0": "Kebun",
         "1": "Kenampakan alam",
         "2": "Waduk",
         "3": "Memupuk persatuan",
@@ -82,7 +85,7 @@
         "6": "Alam",
         "7": "Tuhan",
         "8": "Danau",
-        "9": "Menanam palawija",
-        "10": "Kebun"
+        "9": "Menanam palawija"
+        
     }
 ]
