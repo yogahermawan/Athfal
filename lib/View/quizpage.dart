@@ -105,7 +105,7 @@ class _quizpageState extends State<quizpage> {
   //   print(random_array);
 
   void randomArray() {
-    for (int i = 0;;) {
+    for (int i = 1;;) {
       distinctIds.add(rand.nextInt(10));
       random_array = distinctIds.toSet().toList();
       if (random_array.length < 10) {
@@ -114,6 +114,7 @@ class _quizpageState extends State<quizpage> {
         break;
       }
     }
+    print("ini random array");
     print(random_array);
   }
 

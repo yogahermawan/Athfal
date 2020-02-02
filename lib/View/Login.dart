@@ -52,7 +52,6 @@ class _LoginState extends State<Login> {
             MaterialPageRoute(builder: (context) => InputMateri()),
             (Route<dynamic> route) => false);
       } else {
-        // jika kode sekolah salah
         showToast(value.message);
         setState(() {
           _saving = false;

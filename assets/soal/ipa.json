@@ -1,5 +1,6 @@
 [
     {
+        "0": "Surat al-lahab mengatakan kisah seorang pendengki bernama?",
         "1": "Berikut ini adalah salah satu ciri-ciri makhuk hidup adalah ....",
         "2": "Burung dapat bertelur untuk melanjutkan keturunannnya, hal itu adalah ciri makhluk hidup yaitu ....",
         "3": "Tumbuhan yang bisa bergerak dengan menutup daunnya ketika disentuh adalah ....",
@@ -8,10 +9,15 @@
         "6": "Tumbuhan membutuhkan sinar matahari untuk ....",
         "7": "Hewan dan manusia sangat membutuhkan tumbuhan karena ....",
         "8": "Berikut ini adalah hal-hal yang dibutuhkan hewan, kecuali ....",
-        "9": "Berikut ini yang bukan merupakan golongan makhluk hidup adalah ....",
-        "10": "Hewan yang dapat hidup di darat dan di air dinamakan hewan ...."
+        "9": "Berikut ini yang bukan merupakan golongan makhluk hidup adalah ...."
     },
     {
+        "0": {
+            "a": "Abu lahap",
+            "b": "Abu nawas",
+            "c": "Firaun",
+            "d": "Umar"
+        },
         "1": {
             "a": "Diam di tempat",
             "b": "Menghadap keatas",
@@ -65,15 +71,11 @@
             "b": "Tumbuhan",
             "c": "Manusia",
             "d": "Tanah"
-        },
-        "10": {
-            "a": "Karnivora",
-            "b": "Herbivora",
-            "c": "Amfibi",
-            "d": "Mimikri"
         }
+      
     },
     {
+        "0": "Amfibi",
         "1": "Membutuhkan makanan",
         "2": "Berkembang biak",
         "3": "Putri malu",
@@ -82,7 +84,7 @@
         "6": "Fotosintesis",
         "7": "Merupakan penghasil oksigen",
         "8": "Pakaian",
-        "9": "Tanah",
-        "10": "Amfibi"
+        "9": "Tanah"
+       
     }
 ]

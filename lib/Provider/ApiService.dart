@@ -120,22 +120,22 @@ class ApiService {
     }
   }
 
-Future postMateri(
-      String idKelas, String namaMateri, String isiMateri) async {
+   Future postMateri(String idKelas, String namaMateri, String isiMateri) async {
+   
     final data = {
-      "idKelas" : idKelas,
-      "namaMateri" : namaMateri,
-      "isiMateri" : isiMateri
+    "idKelas": idKelas,
+      "namaMateri": namaMateri,
+      "isiMateri": isiMateri
     };
     final body = json.encode(data);
-    print("==============>");
+    print("Ini Tahu");
     print(body);
     final response = await http.post(
         "http://ec2-34-203-236-133.compute-1.amazonaws.com/postMateri",
         headers: {"Content-Type": "application/json"},
         body: body);
 
-    if (response?.statusCode == 200) {
+    if (response.statusCode == 200) {
       final res = MateriModel.fromJson(json.decode(response.body));
       return res;
     } else {

@@ -18,7 +18,6 @@ void main() => runApp(MaterialApp(
   HomePage(),
   initialRoute: "/",
   routes: {
-    "/kelas" :(context)=>ListKelas(),
     "/soal" :(context)=>ListSoal(),
     
 
