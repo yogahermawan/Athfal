@@ -37,7 +37,7 @@ class _ListSoalState extends State<ListSoal> {
 
 static List<soalModel> getSoal(){
 return<soalModel>[
-soalModel(id:'1', soal:'IPA', kelas:'Kelas 3'),
+soalModel(id:'1', soal:'Islam', kelas:'Kelas 3'),
 soalModel(id:'2', soal:'IPS', kelas:'Kelas 7'),
 soalModel(id:'3', soal:'IPA', kelas:'Kelas 3'),
 soalModel(id:'4', soal:'IPS', kelas:'Kelas 2'),

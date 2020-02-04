@@ -5,6 +5,7 @@ import 'package:etestt/View/Dashboard.dart';
 import 'package:etestt/View/resultpage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'ListSoal.dart';
 
@@ -20,8 +21,8 @@ class getjson extends StatelessWidget {
   // and opens the JSON
   setasset() {
     print('langname =>' + langname);
-    if (langname == "IPA") {
-      assettoload = "assets/soal/ipa.json";
+    if (langname == "Islam") {
+      assettoload = "assets/soal/kelas1.json";
     } else if (langname == "IPS") {
       assettoload = "assets/soal/ips.json";
       print('Asset Load ==>' + assettoload);
@@ -173,16 +174,25 @@ class _quizpageState extends State<quizpage> {
     });
     starttimer();
   }
-
+  void showToast(String msg) {
+    Fluttertoast.showToast(
+      msg: msg,
+      toastLength: Toast.LENGTH_LONG,
+      timeInSecForIos: 1,
+      gravity: ToastGravity.BOTTOM,
+    );
+  }
   void checkanswer(String k) {
     if (mydata[2][i.toString()] == mydata[1][i.toString()][k]) {
       marks = marks + 5;
       // changing the color variable to be green
       colortoshow = right;
+      showToast('Jawaban Benar!');
     } else {
       // just a print sattement to check the correct working
       // debugPrint(mydata[2]["1"] + " is equal to " + mydata[1]["1"][k]);
       colortoshow = wrong;
+      showToast('Jawaban Salah!');
     }
     setState(() {
       // applying the changed color to the particular button that was selected

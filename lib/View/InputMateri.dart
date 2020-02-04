@@ -174,6 +174,34 @@ class _InputMateriState extends State<InputMateri> {
        apiServices.postMateri(_selecetedkelas.id.toString(),_judulMateri.text, _materi.text).then((value) async{
 
         showToast('Berhasil Input Data');
+        return showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+                  backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
+                  title: Text(
+                    "Input Materi",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  content: Text(
+                    "Materi telah ditambahkan",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  actions: <Widget>[
+                    FlatButton(
+                      onPressed: () {
+                        // Navigator.pushAndRemoveUntil(
+                        //     context,
+                        //     MaterialPageRoute(builder: (context) => HomePage()),
+                        //     (Route<dynamic> route) => false);
+                        print("okayy");
+                      },
+                      child: Text(
+                        'Ok',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    )
+                  ],
+                ));
       
     
     });    

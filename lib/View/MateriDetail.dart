@@ -3,6 +3,7 @@ import 'package:etestt/Model/MateriDetailModel.dart';
 import 'package:etestt/Provider/ApiService.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:video_player/video_player.dart';
 import '../Model/MateriModel.dart';
 
 import '../alertdialog.dart';
@@ -21,6 +22,9 @@ class _MateriDetailState extends State<MateriDetail> {
   //final duplicateItems = getMateri();
   Future<List<MateriModel>> _mat;
   ApiService _apiServices = ApiService();
+  //video player
+  VideoPlayerController _controller;
+  Future<void> _initializeVideoPlayerFuture;
 
   final appBar = CupertinoNavigationBar(
     middle: Text("Materi Pelajaran"),
@@ -31,9 +35,21 @@ class _MateriDetailState extends State<MateriDetail> {
     // TODO: implement initState
     super.initState();
     _mat = _apiServices.getMateriDetail(widget.idMateri);
-    print("kesini kan" );
-
+    print("kesini kan");
+    _controller = VideoPlayerController.network(
+      'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
+    );
+    _initializeVideoPlayerFuture = _controller.initialize();
+    _controller.play();
     //  items.addAll(duplicateItems);
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _controller.dispose();
+    super.dispose();
+    _controller.pause();
   }
 
   @override
@@ -43,7 +59,7 @@ class _MateriDetailState extends State<MateriDetail> {
         body: FutureBuilder(
           future: _mat,
           // ignore: missing_return
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
+          builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
                 return Text('Tidak ada Materi');
@@ -55,12 +71,14 @@ class _MateriDetailState extends State<MateriDetail> {
                 if (snapshot.hasError) {
                   final refresh = Column(
                     children: <Widget>[
-                      IconButton(
-                        icon: Icon(CupertinoIcons.refresh),
-                        onPressed: () {},
+                      Container(
+                        child: IconButton(
+                          icon: Icon(CupertinoIcons.refresh),
+                          onPressed: () {},
+                        ),
                       ),
-                      Text("Terjadi Kesalahan"),
-                      // Text('${snapshot.error}',
+                      Container(child: Text("Terjadi Kesalahan")),
+                      // Text('_controller${snapshot.error}',
                       // style: TextStyle(color: Colors.red))
                     ],
                   );
@@ -104,6 +122,11 @@ class _MateriDetailState extends State<MateriDetail> {
                                 snapshot.data[index].isiMateri,
                               ),
                             ),
+                            Container(
+                                child: AspectRatio(
+                              aspectRatio: _controller.value.aspectRatio,
+                              child: VideoPlayer(_controller),
+                            ))
                           ],
                         ),
                       );
@@ -113,6 +136,25 @@ class _MateriDetailState extends State<MateriDetail> {
                 }
             }
           },
-        ));
+        ),
+        floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Wrap the play or pause in a call to `setState`. This ensures the
+          // correct icon is shown.
+          setState(() {
+            // If the video is playing, pause it.
+            if (_controller.value.isPlaying) {
+              _controller.pause();
+            } else {
+              // If the video is paused, play it.
+              _controller.play();
+            }
+          });
+        },
+        // Display the correct icon depending on the state of the player.
+        child: Icon(
+          _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
+        ),
+      ),);
   }
 }

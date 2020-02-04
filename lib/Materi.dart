@@ -4,7 +4,6 @@ class MateriPage extends StatelessWidget {
   static final routeName = "/materi";
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       appBar: AppBar(
         title: Text("Materi Pembelajaran"),

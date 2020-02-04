@@ -6,19 +6,19 @@ class AlertDialogPage extends StatelessWidget{
     return AlertDialog(
       title: Text('Pilih Kelas'),
       actions: <Widget>[
-        FlatButton(
-          child: Text('Ok'),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-        RaisedButton(
-          child: Text("Materi"),
-          color: Colors.black,
-//            onPressed: () {
-//            Navigator.pushNamed(context, MateriPage.routeName);
-//          },
-        )
+//         FlatButton(
+//           child: Text('Ok'),
+//           onPressed: () {
+//             Navigator.of(context).pop();
+//           },
+//         ),
+//         RaisedButton(
+//           child: Text("Materi"),
+//           color: Colors.black,
+// //            onPressed: () {
+// //            Navigator.pushNamed(context, MateriPage.routeName);
+// //          },
+//         )
       ],
     );
   }

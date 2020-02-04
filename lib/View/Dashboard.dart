@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:etestt/Model/MenuModel.dart';
+import 'package:etestt/View/TentangApp.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -26,21 +27,21 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       MenuModel(
-          title: "Tentang Aplikasi",
+          title: "Tentang",
           icon: Icon(
             Icons.info,
             size: 30.0,
             color: Colors.grey,
           ),
-          routes: "/tukarLiburHistory"),
+          routes: "/tentangapp"),
       MenuModel(
-          title: "Latihan Soal",
-          icon: Icon(
-            Icons.create,
-            size: 30.0,
-            color: Colors.grey,
-          ),
-         ),
+        title: "Latihan Soal",
+        icon: Icon(
+          Icons.create,
+          size: 30.0,
+          color: Colors.grey,
+        ),
+      ),
       MenuModel(
           title: "Materi Pelajaran",
           icon: Icon(
@@ -71,9 +72,7 @@ class _HomePageState extends State<HomePage> {
       boxFit: BoxFit.fill,
       images: [
         AssetImage('assets/img/img2.jpg'),
-        AssetImage('assets/img/img1.jpg'),
         AssetImage('assets/img/img2.jpg'),
-        AssetImage('assets/img/img1.jpg'),
         AssetImage('assets/img/img2.jpg'),
       ],
       showIndicator: false,
@@ -105,22 +104,25 @@ class _HomePageState extends State<HomePage> {
               return Container(
                 padding: const EdgeInsets.all(0.0),
                 child: Card(
-                  elevation: 0,
+                  elevation: 2.0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: InkWell(
                     borderRadius: BorderRadius.all(Radius.circular(20.0)),
                     onTap: () {
-                       if (items[index].title == 'Keluar') {
+                      if (items[index].title == 'Keluar') {
                         exit(0);
-                      } else if (items[index].title == 'Latihan Soal' || items[index].title =='Materi Pelajaran') {
+                      } else if (items[index].title == 'Latihan Soal' ||
+                          items[index].title == 'Materi Pelajaran') {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
                           return ListKelas(
                             title: items[index].title,
                           );
                         }));
+                      }else{
+                        Navigator.pushNamed(context, TentangApp.routeName);
                       }
                     },
                     child: Container(
