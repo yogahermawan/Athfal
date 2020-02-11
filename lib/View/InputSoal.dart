@@ -35,7 +35,7 @@ class _InputSoalState extends State<InputSoal> {
       kelasModel('6', 'Kelas 6'),
     ];
   }
-
+  
   List<kelasModel> _kelas = getKelas();
   List<DropdownMenuItem<kelasModel>> _dropdownMenuItems;
   kelasModel _selecetedkelas;
