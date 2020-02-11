@@ -21,7 +21,7 @@ class getjson extends StatelessWidget {
   // and opens the JSON
   setasset() {
     print('langname =>' + langname);
-    if (langname == "Islam") {
+    if (langname == "Dasar Aqidah Islam") {
       assettoload = "assets/soal/kelas1.json";
     } else if (langname == "IPS") {
       assettoload = "assets/soal/ips.json";
@@ -184,7 +184,7 @@ class _quizpageState extends State<quizpage> {
   }
   void checkanswer(String k) {
     if (mydata[2][i.toString()] == mydata[1][i.toString()][k]) {
-      marks = marks + 5;
+      marks = marks + 7;
       // changing the color variable to be green
       colortoshow = right;
       showToast('Jawaban Benar!');

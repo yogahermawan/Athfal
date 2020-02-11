@@ -1,34 +1,32 @@
+import 'package:etestt/View/InputMateri.dart';
+import 'package:etestt/View/InputSoal.dart';
 import 'package:etestt/View/ListMapel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../alertdialog.dart';
-import 'ListMateri.dart';
-import 'ListSoal.dart';
-
-class ListKelas extends StatefulWidget {
+class adminHome extends StatefulWidget {
   final String title;
 
-  ListKelas({this.title});
+  adminHome({this.title});
 
   @override
-  _ListKelasState createState() => _ListKelasState();
+  _adminHomeState createState() => _adminHomeState();
 }
 
-class _ListKelasState extends State<ListKelas> {
+class _adminHomeState extends State<adminHome> {
   static final routeName = "/kelas";
-  final kelas = [
-    kelasModel('1', 'Kelas 1'),
-    kelasModel('2', 'Kelas 2'),
-    kelasModel('3', 'Kelas 3'),
-    kelasModel('4', 'Kelas 4'),
-    kelasModel('5', 'Kelas 5'),
-    kelasModel('6', 'Kelas 6'),
+  final menu = [
+    kelasModel('1', 'Input Materi'),
+    kelasModel('2', 'Input Soal'),
+    // kelasModel('3', 'Kelas 3'),
+    // kelasModel('4', 'Kelas 4'),
+    // kelasModel('5', 'Kelas 5'),
+    // kelasModel('6', 'Kelas 6'),
   ];
 
   final appBar = CupertinoNavigationBar(
     middle: Text(
-      "Pilih Kelas",
+      "Pilih Input",
     ),
     //   backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
   );
@@ -38,26 +36,17 @@ class _ListKelasState extends State<ListKelas> {
     return Scaffold(
         appBar: appBar,
         body: ListView.builder(
-            itemCount: kelas.length,
+            itemCount: menu.length,
             itemBuilder: (BuildContext ctxt, int index) {
-              // print("===============>");
-              print(widget.title);
               return InkWell(
                 onTap: () {
-                  if (widget.title == "Latihan Soal") {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return ListSoal(
-                        kelas: kelas[index].id
-                      );
-                    }));
+                  // return ListSoal(kelas: menu[index].id);
+                  if (menu[index].id == 1) {
+                    Navigator.push(
+                        context, MaterialPageRoute(builder: (context) => InputMateri()));
                   } else {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return ListMateri(
-                        idKelas: kelas[index].id,
-                      );
-                    }));
+                    Navigator.push(
+                        context, MaterialPageRoute(builder: (context) => InputSoal()));                   
                   }
                 },
                 child: Card(
@@ -72,7 +61,7 @@ class _ListKelasState extends State<ListKelas> {
                         width: MediaQuery.of(context).size.width,
                         child: ListTile(
                           title: Text(
-                            kelas[index].kelas,
+                            menu[index].kelas,
                           ),
                           trailing: Icon(
                             Icons.arrow_forward_ios,

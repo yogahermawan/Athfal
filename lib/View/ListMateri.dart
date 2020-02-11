@@ -26,7 +26,7 @@ class _ListMateriState extends State<ListMateri> {
 
 
   final appBar = CupertinoNavigationBar(
-    middle: Text("Ayo Belajar", ),
+    middle: Text("Kelas 1", ),
    );
 
   @override
@@ -34,7 +34,7 @@ class _ListMateriState extends State<ListMateri> {
     // TODO: implement initState
     super.initState();
     _mat = _apiServices.getMateriList(widget.idKelas);
-    print("kesini aaakan"+widget.idKelas);
+    // print("kesini aaakan"+widget.idKelas);
 
     //  items.addAll(duplicateItems);
   }

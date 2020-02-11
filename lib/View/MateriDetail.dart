@@ -19,8 +19,8 @@ class MateriDetail extends StatefulWidget {
 
 class _MateriDetailState extends State<MateriDetail> {
   static final routeName = "/kelas";
-  //final duplicateItems = getMateri();
-  Future<List<MateriModel>> _mat;
+  // final duplicateItems = getMateri();
+  Future<MateriModel> _mat;
   ApiService _apiServices = ApiService();
   //video player
   VideoPlayerController _controller;
@@ -47,9 +47,9 @@ class _MateriDetailState extends State<MateriDetail> {
   @override
   void dispose() {
     // TODO: implement dispose
-    _controller.dispose();
+    // _controller.dispose();
     super.dispose();
-    _controller.pause();
+    // _controller.pause();
   }
 
   @override
@@ -59,7 +59,7 @@ class _MateriDetailState extends State<MateriDetail> {
         body: FutureBuilder(
           future: _mat,
           // ignore: missing_return
-          builder: (context, snapshot) {
+          builder: (context, AsyncSnapshot<MateriModel> snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
                 return Text('Tidak ada Materi');
@@ -68,6 +68,9 @@ class _MateriDetailState extends State<MateriDetail> {
               case ConnectionState.waiting:
                 return new Center(child: CircularProgressIndicator());
               case ConnectionState.done:
+              print(snapshot.hasError);
+              print(snapshot);
+              print("MBUHH");
                 if (snapshot.hasError) {
                   final refresh = Column(
                     children: <Widget>[
@@ -91,10 +94,7 @@ class _MateriDetailState extends State<MateriDetail> {
                         child: Text("Tidak ada Materi")),
                   );
                 } else {
-                  final materi = ListView.builder(
-                    itemCount: snapshot.data.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Container(
+                  final materi = Container(
                         width: MediaQuery.of(context).size.width,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -104,7 +104,7 @@ class _MateriDetailState extends State<MateriDetail> {
                               title: Container(
                                 padding: EdgeInsets.only(bottom: 10.0),
                                 child: Text(
-                                  snapshot.data[index].namaMateri,
+                                  snapshot.data.namaMateri,
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20.0),
@@ -119,7 +119,7 @@ class _MateriDetailState extends State<MateriDetail> {
                               color: Colors.white,
                               padding: EdgeInsets.all(15.0),
                               child: Text(
-                                snapshot.data[index].isiMateri,
+                                snapshot.data.isiMateri,
                               ),
                             ),
                             Container(
@@ -130,8 +130,6 @@ class _MateriDetailState extends State<MateriDetail> {
                           ],
                         ),
                       );
-                    },
-                  );
                   return materi;
                 }
             }

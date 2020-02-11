@@ -18,10 +18,8 @@ class ApiService {
     };
     final body = json.encode(data);
     print(body);
-    final res = await http.post(
-        "http://ec2-34-203-236-133.compute-1.amazonaws.com/mapel/getMapel",
-        headers: {"Content-Type": "application/json"},
-        body: body);
+    final res =
+        await http.get("http://159.65.108.6:8888/mapel/getMapel/${body}");
     final resResult = json.decode(res.body);
     if (resResult['data'] != null) {
       jurnal = (resResult['data'] as List)
@@ -36,16 +34,9 @@ class ApiService {
 
   Future<List<MateriModel>> getMateriList(String idKelas) async {
     List<MateriModel> materi;
-    var data = {"idKelas": idKelas};
-    final body = json.encode(data);
-    print(body);
-    final res = await http.post(
-        "http://ec2-34-203-236-133.compute-1.amazonaws.com/mapel/getmateri",
-        headers: {"Content-Type": "application/json"},
-        body: body);
+    final res =
+        await http.get("http://159.65.108.6:8888/mapel/getmateri/$idKelas");
     final resResult = json.decode(res.body);
-    print('ini data');
-    print(resResult['data']);
     if (resResult['data'] != null) {
       materi = (resResult['data'] as List)
           .map((data) => MateriModel.fromJson(data))
@@ -56,21 +47,14 @@ class ApiService {
     }
   }
 
-  Future<List<MateriModel>> getMateriDetail(int idMapel) async {
-    List<MateriModel> detailMapel;
-    var data = {
-      "idMapel": idMapel,
-    };
-    final body = json.encode(data);
-    final res = await http.post(
-        "http://ec2-34-203-236-133.compute-1.amazonaws.com/mapel/detailmapel",
-        headers: {"Content-Type": "application/json"},
-        body: body);
+  Future<MateriModel> getMateriDetail(int idMapel) async {
+    MateriModel detailMapel;
+    var url = "http://159.65.108.6:8888/materi/$idMapel";
+    final res = await http.get(url);
     final resResult = json.decode(res.body);
+    print(resResult['data']);
     if (resResult['data'] != null) {
-      detailMapel = (resResult['data'] as List)
-          .map((data) => MateriModel.fromJson(data))
-          .toList();
+      detailMapel = MateriModel.fromJson(resResult['data']);
       return detailMapel;
     } else {
       return null;
@@ -81,12 +65,13 @@ class ApiService {
     final body = json.encode(value);
     try {
       final response = await http
-          .post("http://ec2-34-203-236-133.compute-1.amazonaws.com/login",
+          .post("http://159.65.108.6:8888/login",
               headers: {"Content-Type": "application/json"}, body: body)
           .timeout(Duration(minutes: 1))
           .catchError((onError) => print(onError));
 
       print('response code ' + response?.statusCode.toString());
+      print('response code ' + response?.body.toString());
       if (response?.statusCode == 200) {
         final res = LoginResult.fromJson(json.decode(response.body));
         return res;
@@ -120,10 +105,9 @@ class ApiService {
     }
   }
 
-   Future postMateri(String idKelas, String namaMateri, String isiMateri) async {
-   
+  Future postMateri(String idKelas, String namaMateri, String isiMateri) async {
     final data = {
-    "idKelas": idKelas,
+      "idKelas": idKelas,
       "namaMateri": namaMateri,
       "isiMateri": isiMateri
     };

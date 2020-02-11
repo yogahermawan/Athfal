@@ -1,5 +1,6 @@
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:etestt/View/InputMateri.dart';
+import 'package:etestt/View/adminHome.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:etestt/Provider/ApiService.dart';
@@ -49,7 +50,7 @@ class _LoginState extends State<Login> {
         showToast(value.message);
         Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) => InputMateri()),
+            MaterialPageRoute(builder: (context) => adminHome()),
             (Route<dynamic> route) => false);
       } else {
         showToast(value.message);
